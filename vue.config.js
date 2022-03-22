@@ -40,13 +40,16 @@ module.exports = {
     workboxOptions: {
       skipWaiting: true,
       clientsClaim: true,
-      // importWorkboxFrom: 'local',
-      // importsDirectory: 'js',
-      // navigateFallbackAllowlist: [/^\/api\//],
+      cacheId: 'pwp_app_pixiviz',
+      sourcemap: false,
+      disableDevLogs: true,
+      navigateFallback: './index.html',
+      navigateFallbackAllowlist: [/^\/artist|search|usearch|rank|pic|sponsor|404|history/],
+      navigationPreload: false,
       runtimeCaching: [
         {
           // 静态文件缓存，网络资源优先，7天过期
-          urlPattern: /^https:\/\/pixiviz\.pwp\.app(\/.*\.(html|js|css))?$/,
+          urlPattern: /^https:\/\/pixiviz\.pwp\.app(\/\S+\.(html|js|css))?$/,
           handler: 'NetworkFirst',
           options: {
             cacheName: 'static-files',
